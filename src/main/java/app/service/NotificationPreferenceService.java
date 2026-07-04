@@ -4,6 +4,7 @@ import app.model.NotificationPreference;
 import app.repository.NotificationPreferenceRepository;
 import app.web.dto.NotificationPreferenceRequest;
 import app.web.dto.NotificationPreferenceResponse;
+import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -15,17 +16,18 @@ import static app.web.mapper.NotificationPreferenceMapper.toNotificationPreferen
 public class NotificationPreferenceService {
 
     private final NotificationPreferenceRepository preferenceRepository;
+    private final ResourcePatternResolver resourcePatternResolver;
 
-    public NotificationPreferenceService(NotificationPreferenceRepository preferenceRepository) {
+    public NotificationPreferenceService(NotificationPreferenceRepository preferenceRepository, ResourcePatternResolver resourcePatternResolver) {
         this.preferenceRepository = preferenceRepository;
+        this.resourcePatternResolver = resourcePatternResolver;
     }
 
     public NotificationPreferenceResponse upsert(NotificationPreferenceRequest request) {
 
         Optional<NotificationPreference> optionalNotificationPreference = preferenceRepository
-                .findById(UUID.fromString(request.getUserId()));
-
-        // Update the preference if it exists
+                .findByUserId(UUID.fromString(request.getUserId()));
+        // Update
         if (optionalNotificationPreference.isPresent()) {
             NotificationPreference notificationPreference = optionalNotificationPreference.get();
             notificationPreference.setEnabled(request.isNotificationEnabled());
@@ -34,10 +36,9 @@ public class NotificationPreferenceService {
             NotificationPreference updatedPreference = preferenceRepository.save(notificationPreference);
 
             return toNotificationPreferenceResponse(updatedPreference);
-
         }
 
-        // Create a new preference if it doesn't exist
+        // Create
         NotificationPreference newPreference = NotificationPreference.builder()
                 .userId(UUID.fromString(request.getUserId()))
                 .enabled(request.isNotificationEnabled())
@@ -48,7 +49,11 @@ public class NotificationPreferenceService {
                 .build();
 
         NotificationPreference savedPreference = preferenceRepository.save(newPreference);
-
         return toNotificationPreferenceResponse(savedPreference);
+    }
+
+    public NotificationPreference getById(UUID id) {
+       return preferenceRepository.findByUserId(id)
+               .orElseThrow(() -> new IllegalArgumentException("Notification preference not found"));
     }
 }
