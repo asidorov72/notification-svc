@@ -1,0 +1,180 @@
+{
+  "info" : {
+    "name" : "UltimateREST Export",
+    "schema" : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item" : [ {
+    "name" : "Default Collection",
+    "item" : [ ]
+  }, {
+    "name" : "Java_WEB",
+    "item" : [ {
+      "name" : "notification-service",
+      "item" : [ {
+        "name" : "upsertPreference",
+        "request" : {
+          "method" : "POST",
+          "header" : [ {
+            "key" : "Content-Type",
+            "value" : "application/json",
+            "type" : "text"
+          }, {
+            "key" : "Accept",
+            "value" : "application/json",
+            "type" : "text"
+          } ],
+          "body" : {
+            "mode" : "raw",
+            "raw" : "{\n  \"userId\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"notificationEnabled\": true,\n  \"contactInfo\": \"alexsidorov1972@gmail.com\"\n}",
+            "options" : {
+              "raw" : {
+                "language" : "json"
+              }
+            }
+          },
+          "url" : {
+            "raw" : "http://localhost:8094/api/v1/notification-preferences",
+            "protocol" : "http",
+            "port" : "8094",
+            "host" : [ "localhost" ],
+            "path" : [ "api", "v1", "notification-preferences" ],
+            "variable" : [ ],
+            "query" : [ ]
+          }
+        }
+      }, {
+        "name" : "sendMail",
+        "request" : {
+          "method" : "POST",
+          "header" : [ {
+            "key" : "Content-Type",
+            "value" : "application/json",
+            "type" : "text"
+          }, {
+            "key" : "Accept",
+            "value" : "application/json",
+            "type" : "text"
+          } ],
+          "body" : {
+            "mode" : "raw",
+            "raw" : "{\n  \"userId\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"type\": \"EMAIL\",\n  \"subject\": \"Monthly Payment\",\n  \"body\": \"Our platform charged you 20.00$ for your monthly subscription.\"\n}",
+            "options" : {
+              "raw" : {
+                "language" : "json"
+              }
+            }
+          },
+          "url" : {
+            "raw" : "http://localhost:8094/api/v1/notifications",
+            "protocol" : "http",
+            "port" : "8094",
+            "host" : [ "localhost" ],
+            "path" : [ "api", "v1", "notifications" ],
+            "variable" : [ ],
+            "query" : [ ]
+          }
+        }
+      }, {
+        "name" : "getNotificationsHistory",
+        "request" : {
+          "method" : "GET",
+          "header" : [ {
+            "key" : "Content-Type",
+            "value" : "application/json",
+            "type" : "text"
+          } ],
+          "body" : {
+            "mode" : "raw",
+            "raw" : "{\n  \"userId\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"type\": \"EMAIL\",\n  \"subject\": \"Monthly Payment\",\n  \"body\": \"Our platform charged you 20.00$ for your monthly subscription.\"\n}",
+            "options" : {
+              "raw" : {
+                "language" : "json"
+              }
+            }
+          },
+          "url" : {
+            "raw" : "http://localhost:8094/api/v1/notifications?userId=550e8400-e29b-41d4-a716-446655440000&type=EMAIL",
+            "protocol" : "http",
+            "port" : "8094",
+            "host" : [ "localhost" ],
+            "path" : [ "api", "v1", "notifications" ],
+            "variable" : [ ],
+            "query" : [ {
+              "key" : "userId",
+              "value" : "550e8400-e29b-41d4-a716-446655440000",
+              "disabled" : false
+            }, {
+              "key" : "type",
+              "value" : "EMAIL",
+              "disabled" : false
+            } ]
+          }
+        }
+      }, {
+        "name" : "retryFailed",
+        "request" : {
+          "method" : "PUT",
+          "header" : [ {
+            "key" : "Content-Type",
+            "value" : "application/json",
+            "type" : "text"
+          } ],
+          "body" : {
+            "mode" : "raw",
+            "raw" : "{\n  \"userId\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"type\": \"EMAIL\",\n  \"subject\": \"Monthly Payment\",\n  \"body\": \"Our platform charged you 20.00$ for your monthly subscription.\"\n}",
+            "options" : {
+              "raw" : {
+                "language" : "json"
+              }
+            }
+          },
+          "url" : {
+            "raw" : "http://localhost:8094/api/v1/notifications?userId=550e8400-e29b-41d4-a716-446655440000",
+            "protocol" : "http",
+            "port" : "8094",
+            "host" : [ "localhost" ],
+            "path" : [ "api", "v1", "notifications" ],
+            "variable" : [ ],
+            "query" : [ {
+              "key" : "userId",
+              "value" : "550e8400-e29b-41d4-a716-446655440000",
+              "disabled" : false
+            } ]
+          }
+        }
+      }, {
+        "name" : "deleteAll",
+        "request" : {
+          "method" : "DELETE",
+          "header" : [ {
+            "key" : "Content-Type",
+            "value" : "application/json",
+            "type" : "text"
+          } ],
+          "body" : {
+            "mode" : "raw",
+            "raw" : "{\n  \"userId\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"type\": \"EMAIL\",\n  \"subject\": \"Monthly Payment\",\n  \"body\": \"Our platform charged you 20.00$ for your monthly subscription.\"\n}",
+            "options" : {
+              "raw" : {
+                "language" : "json"
+              }
+            }
+          },
+          "url" : {
+            "raw" : "http://localhost:8094/api/v1/notifications?userId=550e8400-e29b-41d4-a716-446655440000",
+            "protocol" : "http",
+            "port" : "8094",
+            "host" : [ "localhost" ],
+            "path" : [ "api", "v1", "notifications" ],
+            "variable" : [ ],
+            "query" : [ {
+              "key" : "userId",
+              "value" : "550e8400-e29b-41d4-a716-446655440000",
+              "disabled" : false
+            } ]
+          }
+        }
+      } ]
+    } ]
+  } ]
+}
